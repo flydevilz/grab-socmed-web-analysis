@@ -1,0 +1,280 @@
+# ============================================================================
+# BAA5113 – Grab Malaysia sentiment analysis: project configuration
+# Edit values here rather than in the notebooks. Secrets live in .env, NOT here.
+# ============================================================================
+
+project:
+  name: "Grab Malaysia Sentiment Analysis"
+  course: "BAA5113 Web & Social Media Analytics"
+  # Polite, generic identifier for our scraper (no personal info).
+  user_agent: "BAA5113-StudentResearchBot/1.0 (university coursework)"
+
+# ---------------------------------------------------------------------------
+# Section A – Web performance (Google PageSpeed Insights API v5)
+# ---------------------------------------------------------------------------
+pagespeed:
+  endpoint: "https://www.googleapis.com/pagespeedonline/v5/runPagespeed"
+  urls:
+    - https://www.grab.com/my/
+    - https://food.grab.com/my/
+    - https://mart.grab.com/my
+    - https://express.grab.com/ms
+    - https://dineout.grab.com/my
+  strategies: [mobile, desktop]
+  runs_per_combo: 3          # PSI scores vary run to run, so we take the median of 3
+  min_gap_between_runs_s: 60 # PSI caches recent results; space repeat tests of the same page
+  categories: [performance, accessibility, best-practices, seo]
+  max_workers: 2             # parallel API calls; 4 triggered food.grab.com bot protection (NOT_HTML)
+  request_timeout_s: 180
+
+onpage_seo:
+  # Same URLs as above are scraped with requests + BeautifulSoup.
+  delay_between_requests_s: 2
+  request_timeout_s: 30
+
+# ---------------------------------------------------------------------------
+# Section B – Social media (Apify actors)
+# ---------------------------------------------------------------------------
+social:
+  # PILOT_MODE: True = small, cheap run to check relevance.
+  # Set to false ONLY after the team has reviewed the pilot sample.
+  pilot_mode: false   # pilots reviewed 2026-11-05; full data collected (Reddit, X, Threads)
+
+  # "Last 12 months" is computed from the run date (date_to = today).
+  lookback_days: 365
+
+  # Edit freely. Quotes inside the string = exact-phrase search.
+  queries:
+    - GrabFood Malaysia
+    - GrabCar
+    - '"Grab Malaysia"'
+    - grab driver RM
+    - grab KL
+    - GrabMart
+    - GrabPay Malaysia
+    - "#GrabMY"
+    - grab mahal        # Malay: "grab is expensive"
+    - grab lambat       # Malay: "grab is slow/late"
+
+  platforms:
+    reddit:
+      enabled: true
+      actor_id: fatihtahta/reddit-scraper-search-fast
+      # One actor run per subreddit, using the actor's subredditName + subredditKeywords inputs.
+      # Round 1 (2026-11-05): [malaysia, kualalumpur, Bolehland, penang] with the 8 keywords below.
+      # Round 2 (2026-11-06, top-up to reach 2,000 clean English items): r/malaysia only, new keywords.
+      subreddits: [malaysia]
+      # Reddit-specific keywords (override social.queries for Reddit only).
+      # Round 1 keywords: Grab Malaysia, GrabFood, Grab driver, GrabCar, Grab delivery,
+      #                   Grab customer service, Grab app, Grab fees
+      # Round 2 keywords: e-hailing, Grab rider, GrabPay, foodpanda, Grab price, Grab surge,
+      #   Grab cancel, Grab Unlimited, Grab scam, Grab voucher. The run stopped at its US$0.27 cap
+      #   after Grab rider / GrabPay / Grab scam / foodpanda / Grab voucher.
+      # Round 3 (final top-up, US$0.07 cap): the five keywords round 2 never reached.
+      queries:
+        - e-hailing
+        - Grab price
+        - Grab surge
+        - Grab cancel
+        - Grab Unlimited
+      lookback_days: 365              # 12 months (pilot 1 used 90 days: too few posts)
+      sort: new                       # relevance | hot | top | new | comments
+      timeframe: year                 # actor has no 3-month option; dateFrom does the exact cut
+      scrape_comments: true           # each comment is a charged item
+      max_comments_per_post: 30       # pilot 2 used 10; raised for more data per relevant thread
+      sentiment_analysis: true        # actor adds AFINN-165 sentiment_score / sentiment_label
+      strict_search: true             # closer keyword matching (pilot 1 had many loose matches)
+      pilot_cap_per_query: 20
+      full_cap_per_query: 60          # pilot 2 never hit 20, so this is effectively "everything"
+      price_per_item_usd: 0.00149     # FREE tier price per dataset item (checked 2026-11-05)
+      price_per_start_usd: 0.0
+      max_charge_per_run_usd: {pilot: 1.00, full: 0.07}   # round 1: 0.90 x 4 runs; round 2: 0.27; round 3: 0.07
+      # Round 4 (2026-11-17, new Apify account, remaining ~US$1.76): new Malaysian subreddits.
+      round4:
+        subreddits: [KualaLumpur, malaysians, MalaysianFood, penang]
+        queries: [Grab, GrabFood, GrabCar, e-hailing]
+        max_posts_per_query: 15
+        max_charge_per_run_usd: 0.42
+
+    twitter:
+      enabled: true
+      # Switched from apidojo/tweet-scraper (not usable via API on the Apify Free plan)
+      # to xquik/x-tweet-scraper: works on the Free plan, US$0.00015/tweet, no start fee,
+      # no minimum per query, native retweets excluded by default.
+      actor_id: xquik/x-tweet-scraper
+      # X-specific queries (X advanced-search syntax). Pilot 1 with the generic list pulled in
+      # Indonesian tweets ("mahal"/"nge-grab"), $GRAB investor posts and junk from "RM"/"KL".
+      # These add Malaysian context words and exclude common Indonesian slang + the stock ticker.
+      # Pilot 2 (these queries): Indonesian markers 8/155 (was much higher); remaining noise is filtered in 02.
+      # Round 1 (collected 2026-11-05, mostly Malay/Indonesian, 721 tweets):
+      #   '@GrabMY -from:GrabMY'
+      #   '"Grab Malaysia" -$GRAB'
+      #   '(grabfood OR "grab food") (lambat OR mahal OR rider OR cancel OR order) (tak OR nak OR dah OR lah OR kat OR je OR RM) -gak -nggak -banget -udah -aja -gw -gue -Rp -ga -temen -gimana -wkwk -lang:ja'
+      #   '(grabcar OR "grab driver" OR "driver grab") (tak OR nak OR dah OR lah OR kat OR je OR RM) -gak -nggak -banget -udah -aja -gw -gue -Rp -ga -temen -gimana -wkwk -lang:ja'
+      #   'grab (Malaysia OR KL OR "Kuala Lumpur" OR Penang OR Johor OR Selangor OR KLIA) -$GRAB -stock -shares -lang:ja'
+      #   'grab (mahal OR lambat OR surge OR cancel) (tak OR nak OR dah OR lah OR RM) -gak -nggak -banget -udah -aja -gw -gue -rupiah -Rp -ga -temen -gimana -wkwk -lang:ja'
+      #   '(grabpay OR "grab pay") (Malaysia OR RM OR tak OR nak) -$GRAB'
+      #   '(grabmart OR "grab mart") (Malaysia OR RM OR tak OR nak OR dah) -$GRAB -earnings -Rp'
+      # Round 2 = ENGLISH top-up (user priority), collected 2026-11-05, full 12-month window, cap 200:
+      #   'grab (Malaysia OR Malaysian OR KL OR "Kuala Lumpur" OR Penang OR Johor OR JB OR Selangor OR KLIA) lang:en -$GRAB -stock -shares -earnings'   (hit cap: only reached back to 2026-10-15)
+      #   '(grabfood OR "grab food") (Malaysia OR KL OR RM OR Penang OR Johor OR rider OR delivery OR order) lang:en -$GRAB -Philippines -Manila -Singapore'   (hit cap: only reached back to 2026-08-25)
+      #   '(grabcar OR "grab driver" OR "grab ride" OR "grab car") (Malaysia OR KL OR RM OR Penang OR Johor OR KLIA OR airport) lang:en -$GRAB -Philippines -Manila -Singapore -Jakarta -Bali'
+      #   'grab (expensive OR surge OR cancelled OR cancel OR late OR "customer service" OR refund OR scam) (Malaysia OR KL OR RM OR Penang OR Johor) lang:en -$GRAB'
+      #   '(grabpay OR "grab pay" OR grabmart OR "grab mart" OR "grab unlimited") (Malaysia OR RM OR KL) lang:en -$GRAB -earnings'
+      # Round 3 (2026-11-06): after English-only cleaning only 1,370 items were left (target 2,000).
+      # The two queries that hit their cap are re-run over the OLDER months they never reached,
+      # split into date windows. The place query gets service words added, because on its own
+      # "grab ... KL" mostly matched "grab your tickets" (15% kept after cleaning).
+      # Round 3 queries (all came back under their caps, i.e. exhausted):
+      #   - q: '(grabfood OR "grab food") (Malaysia OR KL OR RM OR Penang OR Johor OR rider OR delivery OR order) lang:en -$GRAB -Philippines -Manila -Singapore'
+      #   since: 2025-11-06
+      #   until: 2026-08-26
+      #   split_into: 4
+      #   cap: 250
+      #   - q: 'grab (Malaysia OR Malaysian OR KL OR "Kuala Lumpur" OR Penang OR Johor OR JB OR Selangor OR KLIA) (driver OR rider OR food OR ride OR car OR app OR delivery OR order OR fare OR booked OR took OR "customer service" OR expensive OR cancel) lang:en -$GRAB -stock -shares -ticket -tickets -merch -concert -"grab yours" -"grab your" -"grab a"'
+      #   since: 2025-11-06
+      #   until: 2026-11-06
+      #   split_into: 6
+      #   cap: 200
+      #   - q: '(@GrabMY OR #GrabMY) lang:en -from:GrabMY'
+      #   split_into: 2
+      #   cap: 300
+      # Round 4 (2026-11-06): 1,851 clean items after round 3, still under 2,000. New angles, all
+      # English and all needing Malaysian context: competitor comparisons, more towns, RM prices.
+      #   - q: 'grab (foodpanda OR shopeefood OR "shopee food" OR gojek OR indrive OR maxim OR "airasia ride" OR lalamove OR "e-hailing" OR ehailing) (Malaysia OR Malaysian OR KL OR RM OR Selangor OR Penang OR Johor OR JB OR Klang OR PJ OR Subang OR Ipoh OR Melaka OR Sabah OR Sarawak OR Kuching OR Putrajaya OR Cyberjaya) lang:en -$GRAB'
+      #   split_into: 2
+      #   cap: 250
+      #   - q: '(grab OR grabcar OR grabfood) (Ipoh OR Klang OR "Shah Alam" OR Subang OR PJ OR "Petaling Jaya" OR Cyberjaya OR Putrajaya OR Melaka OR Malacca OR Kuching OR "Kota Kinabalu" OR Sabah OR Sarawak OR Seremban OR Bangsar OR "Bukit Bintang" OR Cheras OR Puchong OR "Mont Kiara" OR KLCC OR "KL Sentral") lang:en -$GRAB -"grab yours" -"grab your" -"grab a" -ticket -tickets'
+      #   split_into: 2
+      #   cap: 250
+      #   - q: 'grab (RM OR ringgit) (fare OR fares OR price OR charged OR charge OR expensive OR cheap OR paid OR surge OR fee OR fees OR tip OR refund) lang:en -$GRAB -Rp -PHP -SGD'
+      #   split_into: 2
+      #   cap: 250
+      # Round 5 (2026-11-06): 1,970 clean after round 4 (target 2,000). Malaysia-specific topics
+      # + the 2-week gap the towns query didn't reach (it hit its cap at 2026-05-21).
+      queries:
+        - q: 'grab (JPJ OR APAD OR SOCSO OR PERKESO OR "gig workers" OR "gig worker" OR "Gig Workers Bill" OR "Anthony Loke" OR LHDN OR SST OR "e-hailing" OR ehailing) lang:en -$GRAB -Philippines -Indonesia -Singapore'
+          split_into: 2
+          cap: 250
+        - q: '(grabfood OR "grab food") ("nasi lemak" OR mamak OR "roti canai" OR "teh tarik" OR "char kuey teow" OR "nasi kandar" OR durian OR "mee goreng" OR "ayam goreng" OR satay OR rendang) lang:en -$GRAB -Singapore -Indonesia -Jakarta -Philippines'
+          split_into: 2
+          cap: 250
+        - q: '(grab OR grabcar OR grabfood) (Ipoh OR Klang OR "Shah Alam" OR Subang OR PJ OR "Petaling Jaya" OR Cyberjaya OR Putrajaya OR Melaka OR Malacca OR Kuching OR "Kota Kinabalu" OR Sabah OR Sarawak OR Seremban OR Bangsar OR "Bukit Bintang" OR Cheras OR Puchong OR "Mont Kiara" OR KLCC OR "KL Sentral") lang:en -$GRAB -"grab yours" -"grab your" -"grab a" -ticket -tickets'
+          since: 2026-05-06
+          until: 2026-05-22
+          cap: 150
+      # Round 3 (2026-11-18, Manglish mode): user's terms + Malaysian-only Malay markers.
+      round3:
+        terms: [grab driver, grabfood, grab fare, grab surge, grab cancel, grab mahal, grab scam, grabcar,
+                grab voucher, grab rider, grab promo, grabfood fast, grab JB, grab Penang]
+        markers: '(nak OR tak OR kat OR takde OR dah OR "abang grab" OR rm OR sbb OR je)'
+        exclude: '-Philippines -Indonesia -Singapore -$GRAB -gojek -rb -ribu -aja -bgt -gw'
+        since: 2026-01-01
+        until: 2026-11-18
+        cap_per_term: 140
+      sort: Latest                    # queryType: Latest | Top | "Latest + Top"
+      pilot_cap_per_query: 20
+      full_cap_per_query: 200         # round 2: 5 queries x 200 = 1,000 tweets max (~US$0.15)
+      price_per_item_usd: 0.00015
+      price_per_start_usd: 0.0
+      max_charge_per_run_usd: {pilot: 0.05, full: 0.05}
+
+    threads:
+      enabled: true
+      actor_id: futurizerush/meta-threads-scraper
+      # Threads-specific keywords (plain keywords only, no search operators).
+      # The generic list returned Filipino posts ("mahal" = Tagalog too) and nothing for 3 keywords.
+      queries:
+        - GrabMY
+        - Grab Malaysia
+        - grab driver malaysia
+        - grabfood malaysia
+        - grabfood rider
+        - grab KL
+        - grab penang
+        - grab JB
+        - grab mahal
+        - grab cancel
+      search_filter: recent           # top | recent
+      pilot_cap_per_query: 10         # actor minimum is 10
+      full_cap_per_query: 45          # 10 queries x 45 = 450 posts max (~US$1.15): priciest platform
+      price_per_item_usd: 0.0025
+      price_per_start_usd: 0.08       # FREE tier: US$0.02 per GB of run memory; the actor runs at 4 GB (test 2026-11-17)
+      memory_mbytes: 1024             # requested 1 GB, but the actor still charged 4 start events (US$0.08/run)
+      max_charge_per_run_usd: {pilot: 0.35, full: 2.00}   # round 1: 1.20; round 2 run B: 720 x 0.0025 + 0.08
+      # Round 2 (2026-11-17, new Apify account): three runs, each row tagged with its keyword.
+      round2:
+        - label: A brand words
+          mode: search
+          max_posts: 120
+          keywords: [GrabMY, "@grabmy", "#grabmalaysia", grabfood, grabcar, grabpay]
+        - label: B phrases
+          mode: search
+          max_posts: 45
+          keywords: [grab driver, grab fare, grab surge, grab cancel, grab mahal, grab scam, grab voucher,
+                     grab rider, grab app, grab JB, grab Penang, grab KL,
+                     grab promo, grab good service, grab driver nice, grabfood fast]
+        - label: C customer posts answered by @grabmy
+          mode: user_replies
+          max_posts: 150
+          usernames: [grabmy]
+
+    facebook:
+      # Added 2026-11-17: comments on Grab Malaysia's public Facebook page posts.
+      enabled: false                  # not part of build_run_plan; runs via its own script
+      posts_actor_id: apify/facebook-posts-scraper        # US$0.005/post + US$0.001/start
+      comments_actor_id: apify/facebook-comments-scraper  # US$0.0025/comment + US$0.001/start
+      pages: ["https://www.facebook.com/GrabMY"]
+      posts_per_page: 40
+      comments_per_post: 25
+      price_per_item_usd: 0.0025
+      price_per_start_usd: 0.001
+      max_charge_per_run_usd: {pilot: 0.10, full: 1.20}
+
+    tiktok:
+      # Added 2026-11-17: comments on Grab Malaysia's TikTok videos (2026).
+      enabled: false                  # runs via its own script
+      actor_id: clockworks/tiktok-comments-scraper   # US$0.00125/comment on FREE (apidojo's caps Free plan at 10 items)
+      profiles: [grabmy]
+      oldest_post_date: "2026-01-01"
+      price_per_item_usd: 0.00125
+      price_per_start_usd: 0.0
+      max_charge_per_run_usd: {pilot: 0.02, full: 0.80}
+
+  retries:
+    attempts: 3
+    base_delay_s: 5
+  # Hard safety cap per actor run (USD), passed to Apify as max_total_charge_usd.
+  # HARD monthly budget (user's limit): before every actor run, the code reads Apify's
+  # month-to-date usage and caps/skips the run so total spend never exceeds this.
+  monthly_budget_usd: 5.00
+  budget_safety_margin_usd: 0.10   # (was briefly 0.04 for the final Reddit top-up on 2026-11-06; month total US$4.96)
+  # Default cap if a platform doesn't set its own max_charge_per_run_usd.
+  # Apify Free plan = US$5 credit per month, shared by all platforms.
+  max_charge_per_run_usd:
+    pilot: 0.50
+    full: 1.00
+
+# ---------------------------------------------------------------------------
+# Notebook 02 – cleaning rules
+# ---------------------------------------------------------------------------
+cleaning:
+  languages: [en, ms, mixed]      # Manglish mode (user decision 2026-11-18); was [en] (2026-11-06) for rounds 1-2
+  min_clean_items: 2000           # below this, collect more (X English search is cheapest)
+  min_words: 3                    # shorter posts are kept ONLY if they contain an opinion word/emoji
+  max_hashtags: 6                 # 6+ hashtags = promo / fan-campaign spam
+  threads_require_malaysia_context: true   # Threads search is global and loose
+  # Posts BY these accounts are brand messages, not public opinion (matched via author_hash)
+  official_accounts: [GrabMY, Grab, GrabFoodMY, GrabSG, GrabPH, GrabID, GrabTH, GrabVN, grabmy_official]
+  bot_accounts: [AutoModerator]
+  output_file: FINAL_grab_my_posts_clean_english.csv   # in data/processed/
+
+paths:
+  raw: data/raw
+  interim: data/interim
+  processed: data/processed
+  web: "website and app analysis/data/pagespeed_raw"      # raw PSI JSON
+  web_tables: "website and app analysis/tables"           # PSI + SEO + app-review tables
+  figures: outputs/figures
+  tables: outputs/tables
+  logs: logs

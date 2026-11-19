@@ -1,0 +1,4 @@
+step,reviews_remaining
+collected,2500
+after removing duplicates (same review returned for en and ms),2500
+after removing empty reviews,2500

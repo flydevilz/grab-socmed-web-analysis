@@ -1,0 +1,48 @@
+{
+ "google_play": {
+  "title": "Grab - Taxi & Food Delivery",
+  "score": 4.8071957,
+  "ratings": 16863093,
+  "reviews": 263841,
+  "histogram": [
+   447326,
+   88819,
+   206064,
+   783331,
+   15337525
+  ],
+  "installs": "100,000,000+",
+  "realInstalls": 372949830,
+  "version": "5.436.0",
+  "updated": 1794904289,
+  "released": "May 30, 2013",
+  "developer": "Grab Holdings"
+ },
+ "app_store": {
+  "trackName": "Grab: Food Delivery, Taxi Ride",
+  "averageUserRating": 4.73393,
+  "userRatingCount": 905812,
+  "version": "5.432.0",
+  "currentVersionReleaseDate": "2026-10-13T00:38:13Z",
+  "averageUserRatingForCurrentVersion": 4.73393,
+  "userRatingCountForCurrentVersion": 905812
+ },
+ "collected_at": {
+  "google_play": "2026-11-17T20:53:55.548790+00:00",
+  "app_store": "2026-11-17T20:54:28.954844+00:00"
+ },
+ "cleaning_funnel": [
+  {
+   "step": "collected",
+   "reviews_remaining": 2500
+  },
+  {
+   "step": "after removing duplicates (same review returned for en and ms)",
+   "reviews_remaining": 2500
+  },
+  {
+   "step": "after removing empty reviews",
+   "reviews_remaining": 2500
+  }
+ ]
+}

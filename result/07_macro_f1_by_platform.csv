@@ -1,0 +1,6 @@
+platform,n,(a) VADER macro_f1,(b) VADER + Manglish lexicon macro_f1,(c) VADER + lexicon + normalisation macro_f1,(d) TF-IDF + Logistic Regression macro_f1
+facebook,9,0.095,0.348,0.348,0.314
+reddit,129,0.319,0.319,0.319,0.448
+threads,52,0.363,0.387,0.387,0.464
+tiktok,8,0.606,0.685,0.685,0.389
+twitter,205,0.398,0.449,0.452,0.516

@@ -1,0 +1,57 @@
+step,items_remaining,removed_at_this_step,source
+Raw items collected,4782,0,round1
+empty / deleted / removed,4738,44,round1
+"duplicate (same post, several queries)",4704,34,round1
+official Grab account,4643,61,round1
+bot / moderator message,4625,18,round1
+not English / Malay / Manglish (other language or script),4546,79,round1
+Reddit comment in a thread not about Grab,4401,145,round1
+does not mention Grab (or uses 'grab' as a verb),3108,1293,round1
+about another country or Grab's stock,3007,101,round1
+Threads post with no Malaysian context,2990,17,round1
+promo / fan spam (6+ hashtags),2928,62,round1
+business advert / fan-club promotion,2623,305,round1
+low-information content,2586,37,round1
+repeated text (copy-paste / cross-post),2578,8,round1
+Raw items collected,1187,0,threads_round2
+empty / deleted / removed,1183,4,threads_round2
+"duplicate (same post, several queries)",1141,42,threads_round2
+official Grab account,1132,9,threads_round2
+bot / moderator message,1132,0,threads_round2
+not English / Malay / Manglish (other language or script),1106,26,threads_round2
+Reddit comment in a thread not about Grab,1106,0,threads_round2
+does not mention Grab (or uses 'grab' as a verb),464,642,threads_round2
+about another country or Grab's stock,441,23,threads_round2
+Threads post with no Malaysian context,229,212,threads_round2
+promo / fan spam (6+ hashtags),229,0,threads_round2
+business advert / fan-club promotion,228,1,threads_round2
+low-information content,228,0,threads_round2
+repeated text (copy-paste / cross-post),219,9,threads_round2
+Raw items collected,86,0,facebook_round1
+empty / deleted / removed,86,0,facebook_round1
+"duplicate (same post, several queries)",62,24,facebook_round1
+official Grab account,62,0,facebook_round1
+bot / moderator message,62,0,facebook_round1
+not English / Malay / Manglish (other language or script),53,9,facebook_round1
+Reddit comment in a thread not about Grab,53,0,facebook_round1
+does not mention Grab (or uses 'grab' as a verb),53,0,facebook_round1
+about another country or Grab's stock,53,0,facebook_round1
+Threads post with no Malaysian context,53,0,facebook_round1
+promo / fan spam (6+ hashtags),53,0,facebook_round1
+business advert / fan-club promotion,53,0,facebook_round1
+low-information content,51,2,facebook_round1
+repeated text (copy-paste / cross-post),33,18,facebook_round1
+Raw items collected,342,0,tiktok_round1
+empty / deleted / removed,342,0,tiktok_round1
+"duplicate (same post, several queries)",342,0,tiktok_round1
+official Grab account,342,0,tiktok_round1
+bot / moderator message,342,0,tiktok_round1
+not English / Malay / Manglish (other language or script),192,150,tiktok_round1
+Reddit comment in a thread not about Grab,192,0,tiktok_round1
+does not mention Grab (or uses 'grab' as a verb),192,0,tiktok_round1
+about another country or Grab's stock,191,1,tiktok_round1
+Threads post with no Malaysian context,191,0,tiktok_round1
+promo / fan spam (6+ hashtags),191,0,tiktok_round1
+business advert / fan-club promotion,191,0,tiktok_round1
+low-information content,153,38,tiktok_round1
+repeated text (copy-paste / cross-post),137,16,tiktok_round1

@@ -1,0 +1,13 @@
+group,n_reviews,pct_of_reviews,avg_rating,n_1_star,n_2_star,n_3_star,n_4_star,n_5_star,pct_1_2_star
+Mentions support / interactive features (any keyword),100,4.0,2.05,70,3,2,2,23,73.0
+"Mentions support, chatbot, agent, help centre or ticket",76,3.0,1.59,61,3,2,2,8,84.2
+Mentions 'recommend' only (mostly 'I recommend this app'),24,1.0,3.5,9,0,0,0,15,37.5
+Mentions none of these,2400,96.0,3.68,683,79,64,83,1491,31.8
+  keyword: chatbot,15,0.6,1.07,14,1,0,0,0,100.0
+  keyword: live chat,1,0.0,1.0,1,0,0,0,0,100.0
+  keyword: support,50,2.0,1.8,37,2,2,2,7,78.0
+  keyword: help centre,12,0.5,1.33,11,0,0,0,1,91.7
+  keyword: agent,15,0.6,1.07,14,1,0,0,0,100.0
+  keyword: AI assistant,1,0.0,1.0,1,0,0,0,0,100.0
+  keyword: recommend,27,1.1,3.37,11,0,0,0,16,40.7
+  keyword: ticket,1,0.0,1.0,1,0,0,0,0,100.0

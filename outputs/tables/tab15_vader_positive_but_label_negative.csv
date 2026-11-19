@@ -1,0 +1,6 @@
+n_such_posts_in_dataset,post_id,platform,lang_group,true_label,a_vader_plain,vader_plain_compound,c_vader_lexicon_norm,vader_lexnorm_compound,text_clean
+252,DfPgT8hk98e,threads,en,negative,positive,0.66,positive,0.66,"Is this giveaway legitimate, or are winners simply being left in the dark after submitting their personal information? [woman shrugging medium-light skin tone] Transparency and accountability, please. @grabmy #GrabMalaysia #GrabGiveaway"
+252,oix30hw,reddit,en,negative,positive,0.637,positive,0.637,Hopefully still have proper CS team for escalations. Sounds like not tho.
+252,2063256762866933989,twitter,en,negative,positive,0.494,positive,0.494,@user @GrabMY Open a KPDN case. I did that for Shopee RM10 petrol campaign and KPDN officer legit took the case and had shopee to honor the campaign voucher when their Shopee CS barely helped in the case
+252,nt9tkzl,reddit,en,negative,positive,0.296,positive,0.296,"I think i know this guy, and yeah Rempit behavior"
+252,Dfo4bvanVAy,threads,mixed,negative,positive,0.51,positive,0.51,"Tahniah @grabmy, dapat rider rude dengan aku, i tried to lodge a proper report via your customer support, but it didn't help i guess? No wonder orang pilih untuk viral kat socmed. [slightly smiling face]"

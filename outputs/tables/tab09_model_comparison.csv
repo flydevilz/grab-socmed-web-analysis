@@ -1,0 +1,6 @@
+method,evaluated_on,n,accuracy,macro_f1,weighted_f1,f1_negative,f1_neutral,f1_positive
+(a) VADER,test (20%),403,0.39,0.374,0.409,0.516,0.336,0.272
+(b) VADER + Manglish lexicon,test (20%),403,0.437,0.406,0.451,0.614,0.331,0.275
+(c) VADER + lexicon + normalisation,test (20%),403,0.439,0.408,0.453,0.616,0.331,0.277
+(d) TF-IDF + Logistic Regression,test (20%),403,0.618,0.509,0.615,0.69,0.64,0.195
+Baseline: always 'negative',test (20%),403,0.447,0.206,0.276,0.617,0.0,0.0

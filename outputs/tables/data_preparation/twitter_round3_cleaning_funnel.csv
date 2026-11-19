@@ -1,0 +1,17 @@
+step,items_remaining,removed_at_this_step
+Raw items collected,813,0
+empty / deleted / removed,813,0
+"duplicate (same post, several queries)",773,40
+official Grab account,771,2
+bot / moderator message,771,0
+not English / Malay / Manglish (other language or script),757,14
+Reddit comment in a thread not about Grab,757,0
+does not mention Grab (or uses 'grab' as a verb),544,213
+about another country or Grab's stock,537,7
+Threads post with no Malaysian context,537,0
+promo / fan spam (6+ hashtags),534,3
+business advert / fan-club promotion,515,19
+low-information content,515,0
+repeated text (copy-paste / cross-post),515,0
+already in dataset (same post_id),377,138
+already in dataset (same text),377,0

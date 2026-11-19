@@ -1,0 +1,17 @@
+# Secrets
+.env
+
+# Raw scraped data (contains usernames; never commit)
+data/raw/*
+!data/raw/.gitkeep
+
+# Logs
+logs/*
+!logs/.gitkeep
+
+# Python / Jupyter
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store

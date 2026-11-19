@@ -1,0 +1,46 @@
+class,rank,term,weight
+negative,1,grabmy,2.047
+negative,2,mahal,1.416
+negative,3,this,1.378
+negative,4,cancel,1.261
+negative,5,dah,1.128
+negative,6,ai,0.838
+negative,7,grab mahal,0.825
+negative,8,nak,0.81
+negative,9,tak,0.793
+negative,10,customer,0.791
+negative,11,have,0.729
+negative,12,this is,0.708
+negative,13,cancelled,0.7
+negative,14,delivery,0.699
+negative,15,fare,0.684
+neutral,1,url,1.172
+neutral,2,grab malaysia,1.058
+neutral,3,grabfood,1.042
+neutral,4,order,0.753
+neutral,5,kalau,0.741
+neutral,6,more,0.7
+neutral,7,only,0.655
+neutral,8,on,0.59
+neutral,9,ada,0.581
+neutral,10,if,0.576
+neutral,11,order grabfood,0.571
+neutral,12,what,0.57
+neutral,13,im,0.56
+neutral,14,can,0.559
+neutral,15,buat,0.549
+positive,1,good,1.839
+positive,2,wow,1.543
+positive,3,fast,1.499
+positive,4,one,1.416
+positive,5,happy,1.407
+positive,6,love,1.361
+positive,7,semalam,1.215
+positive,8,great,1.205
+positive,9,very,1.167
+positive,10,solved,1.112
+positive,11,emoji_red_heart,1.084
+positive,12,kl,1.076
+positive,13,grab is,1.059
+positive,14,our,1.018
+positive,15,thank,1.002

@@ -1,0 +1,7 @@
+platform,n_posts,n_negative,n_neutral,n_positive,pct_negative,pct_neutral,pct_positive,net_sentiment
+X (Twitter),1033,436,471,126,42.2,45.6,12.2,-30.0
+Reddit,676,242,370,64,35.8,54.7,9.5,-26.3
+Threads,224,164,42,18,73.2,18.8,8.0,-65.2
+TikTok,51,30,12,9,58.8,23.5,17.6,-41.2
+Facebook,31,27,3,1,87.1,9.7,3.2,-83.9
+All posts,2015,899,898,218,44.6,44.6,10.8,-33.8

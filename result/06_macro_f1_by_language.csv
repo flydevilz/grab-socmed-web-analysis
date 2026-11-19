@@ -1,0 +1,4 @@
+lang_group,n,(a) VADER macro_f1,(b) VADER + Manglish lexicon macro_f1,(c) VADER + lexicon + normalisation macro_f1,(d) TF-IDF + Logistic Regression macro_f1
+en,266,0.358,0.358,0.358,0.502
+mixed,37,0.33,0.423,0.424,0.434
+ms,100,0.37,0.465,0.471,0.463

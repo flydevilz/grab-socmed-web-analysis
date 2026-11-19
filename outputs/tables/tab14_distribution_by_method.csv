@@ -1,0 +1,5 @@
+method,n_posts,n_negative,n_neutral,n_positive,pct_negative,pct_neutral,pct_positive,agreement_with_labels_pct
+Labels (reference),2015,899,898,218,44.6,44.6,10.8,100.0
+(a) VADER,2015,651,579,785,32.3,28.7,39.0,39.8
+(c) VADER + lexicon + normalisation,2015,790,442,783,39.2,21.9,38.9,43.3
+(d) TF-IDF + LogReg (5-fold out-of-sample),2015,935,877,203,46.4,43.5,10.1,65.1

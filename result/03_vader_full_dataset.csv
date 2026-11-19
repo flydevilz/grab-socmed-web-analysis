@@ -1,0 +1,4 @@
+method,evaluated_on,n,accuracy,macro_f1,weighted_f1,f1_negative,f1_neutral,f1_positive
+(a) VADER,full dataset,2015,0.398,0.384,0.417,0.488,0.378,0.287
+(b) VADER + Manglish lexicon,full dataset,2015,0.434,0.411,0.45,0.567,0.371,0.295
+(c) VADER + lexicon + normalisation,full dataset,2015,0.433,0.41,0.448,0.565,0.367,0.298

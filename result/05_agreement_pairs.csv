@@ -1,0 +1,7 @@
+method_1,method_2,agreement,both_correct,only_method_1_correct,only_method_2_correct,both_wrong
+(a) VADER,(b) VADER + Manglish lexicon,0.918,151,6,25,221
+(a) VADER,(c) VADER + lexicon + normalisation,0.913,151,6,26,220
+(a) VADER,(d) TF-IDF + Logistic Regression,0.345,93,64,156,90
+(b) VADER + Manglish lexicon,(c) VADER + lexicon + normalisation,0.995,176,0,1,226
+(b) VADER + Manglish lexicon,(d) TF-IDF + Logistic Regression,0.414,116,60,133,94
+(c) VADER + lexicon + normalisation,(d) TF-IDF + Logistic Regression,0.414,116,61,133,93

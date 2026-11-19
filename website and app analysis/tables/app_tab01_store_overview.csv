@@ -1,0 +1,4 @@
+source,store_lifetime_avg_rating (all countries),store_lifetime_n_ratings,sample_n_reviews,sample_avg_rating,sample_pct_1_2_star,sample_pct_4_5_star,sample_from,sample_to,pct_with_developer_reply
+App Store (Malaysia store),4.73,905812,500,2.76,55.2,41.6,2026-08-12,2026-11-16,
+Google Play - Malay reviews,4.81,16863093,1000,4.41,13.2,85.0,2026-05-04,2026-11-16,0.4
+Google Play - English reviews (all markets),4.81,16863093,1000,3.24,42.7,54.1,2026-10-31,2026-11-17,44.0

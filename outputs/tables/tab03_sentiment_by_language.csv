@@ -1,0 +1,5 @@
+lang_group,n_posts,n_negative,n_neutral,n_positive,pct_negative,pct_neutral,pct_positive,net_sentiment
+English,1348,543,630,175,40.3,46.7,13.0,-27.3
+Malay,530,280,222,28,52.8,41.9,5.3,-47.5
+Mixed (Manglish),137,76,46,15,55.5,33.6,10.9,-44.5
+All posts,2015,899,898,218,44.6,44.6,10.8,-33.8

@@ -1,0 +1,11 @@
+url,strategy,n_runs,performance_score,accessibility_score,best_practices_score,seo_score,lab_fcp_ms,lab_lcp_ms,lab_tbt_ms,lab_cls,lab_speed_index_ms,field_lcp_ms,field_inp_ms,field_cls,field_data_source,field_lcp_category,field_inp_category,field_cls_category,field_overall_category
+https://dineout.grab.com/my,desktop,3,94.0,91.0,96.0,100.0,332.249,1144.372,112.5,0.007,878.071,1312.0,62.0,0.0,page,FAST,FAST,FAST,FAST
+https://dineout.grab.com/my,mobile,3,70.0,95.0,96.0,100.0,1357.297,11234.771,148.5,0.001,4897.298,2839.0,160.0,0.04,page,AVERAGE,FAST,FAST,AVERAGE
+https://express.grab.com/ms,desktop,3,59.0,81.0,96.0,92.0,860.689,2350.256,535.0,0.0,2438.64,805.0,45.0,0.0,page,FAST,FAST,FAST,FAST
+https://express.grab.com/ms,mobile,3,43.0,81.0,96.0,92.0,3493.075,12173.647,784.5,0.0,7314.409,1566.0,112.0,0.0,page,FAST,FAST,FAST,FAST
+https://food.grab.com/my/,desktop,3,76.0,76.0,96.0,100.0,372.573,1705.478,369.0,0.0,834.081,2452.0,114.0,0.48,page,FAST,FAST,SLOW,SLOW
+https://food.grab.com/my/,mobile,3,15.0,82.0,96.0,100.0,1666.502,24657.518,2338.5,0.456,17675.394,6537.0,427.0,1.0,page,SLOW,AVERAGE,SLOW,SLOW
+https://mart.grab.com/my,desktop,3,74.0,80.0,96.0,100.0,330.311,1511.443,535.0,0.0,1129.999,1482.0,70.0,0.0,page,FAST,FAST,FAST,AVERAGE
+https://mart.grab.com/my,mobile,3,54.0,75.0,92.0,85.0,1109.492,6238.143,959.0,0.0,5941.584,2718.0,241.0,0.07,page,AVERAGE,AVERAGE,FAST,AVERAGE
+https://www.grab.com/my/,desktop,3,65.0,82.0,77.0,85.0,707.0,3361.791,554.0,0.051,2190.404,1682.0,96.0,0.04,page,FAST,FAST,FAST,FAST
+https://www.grab.com/my/,mobile,3,46.0,81.0,77.0,85.0,3021.0,30340.0,648.5,0.0,12358.996,2253.0,371.0,0.0,page,FAST,AVERAGE,FAST,AVERAGE

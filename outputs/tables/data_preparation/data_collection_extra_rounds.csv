@@ -1,0 +1,6 @@
+collection,what,apify_actor(s),collected_on,actor_runs,items_returned_by_actor,posts_in_final_dataset,of_which_malay_or_mixed,of_which_restored_by_manglish_rule,content_from,content_to,by_platform
+X round 3 - Malay keywords,Tweets matching 14 Grab terms combined with Malaysian-Malay marker words,xquik/x-tweet-scraper,2026-11-17,14,813.0,211,208,0,2026-01-06,2026-11-17,{'twitter': 211}
+Threads round 2,Threads search for brand words/phrases + customer posts that @grabmy replied to,futurizerush/meta-threads-scraper,2026-11-17,3,1216.0,100,0,0,2026-05-04,2026-11-17,{'threads': 100}
+Facebook - GrabMY page,Public comments under posts on facebook.com/GrabMY,apify/facebook-comments-scraper; apify/facebook-posts-scraper,2026-11-17,3,155.0,31,22,23,2026-02-25,2026-11-16,{'facebook': 31}
+TikTok - @grabmy videos,Public comments under @grabmy TikTok videos posted in 2026,clockworks/tiktok-comments-scraper,2026-11-17,1,353.0,51,34,35,2026-09-05,2026-11-17,{'tiktok': 51}
+Restored Malay/Manglish posts (no new scraping),Posts from earlier rounds' saved raw files that were dropped only for being Malay; re-cleaned after the team switched to Manglish mode (18 Nov 2026),none (re-cleaning only),2026-11-18,0,,468,459,468,2025-11-09,2026-11-17,"{'twitter': 309, 'threads': 87, 'tiktok': 35, 'facebook': 23, 'reddit': 14}"

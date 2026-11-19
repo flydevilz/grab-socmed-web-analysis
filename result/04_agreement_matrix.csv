@@ -1,0 +1,5 @@
+,(a) VADER,(b) VADER + Manglish lexicon,(c) VADER + lexicon + normalisation,(d) TF-IDF + Logistic Regression
+(a) VADER,1.0,0.918,0.913,0.345
+(b) VADER + Manglish lexicon,0.918,1.0,0.995,0.414
+(c) VADER + lexicon + normalisation,0.913,0.995,1.0,0.414
+(d) TF-IDF + Logistic Regression,0.345,0.414,0.414,1.0
